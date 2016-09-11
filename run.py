@@ -49,11 +49,6 @@ else:
     f1.close()
     f2.close()
 
-# print len(X_train), ",", len(X_train[1])
-# print len(y_train), ",", len(y_train[1])
-# print X_train[1]
-# print y_train[1]
-
 X_train = X[:64000]
 Y_train = Y[:64000]
 X_test = X[64000:]

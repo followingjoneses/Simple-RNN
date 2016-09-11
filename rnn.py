@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def softmax(z):
     a = np.exp(z)
     sigma = sum(a)
@@ -76,7 +75,7 @@ class RNN(object):
 
         for t in np.arange(T)[::-1]:
             grad_V += np.outer(delta_o[t], s[t])
-            delta_s = delta_o.dot(V) * (1-s[t]**2)
+            delta_s = delta_o[t].dot(V) * (1-s[t]**2)
             for j in np.arange(0, t+1)[::-1]:
                 grad_W += np.outer(delta_s, s[j-1])
                 grad_U[:, x[j]] += delta_s
@@ -88,7 +87,7 @@ class RNN(object):
         print "Start training ..."
         for epoch in np.arange(n_epoch):
             loss = self.calculate_loss(X_train, Y_train)
-            print "epoch ", epoch, "loss = ", loss
+            print "epoch", epoch, "loss =", loss
             for i in np.arange(len(Y_train)):
                 grad_V, grad_W, grad_U = self.bptt(X_train[i], Y_train[i])
                 self.U -= learning_rate * grad_U
